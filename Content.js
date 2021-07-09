@@ -4,11 +4,14 @@
 const generateSTYLES = () => {
     return `<style>@import url(https://fonts.googleapis.com/css?family=opensans:500);
     body {
-      background: #33cc99;
+      background: #C32806;
       color: #fff;
       font-family: "Open Sans", sans-serif;
       max-height: 700px;
       overflow: hidden;
+    }
+    .iframe {
+      pointer-events: none;
     }
     .c {
       text-align: center;
@@ -18,7 +21,7 @@ const generateSTYLES = () => {
       margin: 100px auto;
     }
     ._404 {
-      font-size: 220px;
+      font-size: 180px;
       position: relative;
       display: inline-block;
       z-index: 2;
@@ -235,7 +238,7 @@ const generateSTYLES = () => {
   };
 
 
-const generateHTML = (pageName) =>{
+const generateHTML = (pageName,link) =>{
     return `
     <div id="clouds">
       <div class="cloud x1"></div>
@@ -246,18 +249,22 @@ const generateHTML = (pageName) =>{
       <div class="cloud x5"></div>
   </div>
   <div class='c'>
-      <div class='_404'>404</div>
+      <div class='_404'>DANGER</div>
+      
+      <div class='_1'>Phishing website</div>
       <hr>
-      <div class='_1'>GET BACK TO WORK</div>
-      <div class='_2'>STUDYING > ${pageName}</div>
-  </div>
+      <div class='_2'>The website is > ${pageName}</div>
+  
+  
+   <iframe class ='iframe' src="${link}" frameborder="0" width="1000" height="200"></iframe>
+</div>
    `;
 }
 
 checkdata(window.location.href).then(response=>{
     if (response=="Bad Url"){
         document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML(window.location.hostname);
+        document.body.innerHTML = generateHTML(window.location.hostname,window.location.href);
     }else{
 
     }
@@ -272,7 +279,7 @@ switch(window.location.hostname){
         break;
     case "www.facebook.com":
         document.head.innerHTML = generateSTYLES();
-        document.body.innerHTML = generateHTML("FACEBOOK");
+        document.body.innerHTML = generateHTML("FACEBOOK",);
         break;
 }
 
