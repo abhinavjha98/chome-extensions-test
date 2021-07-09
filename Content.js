@@ -253,7 +253,7 @@ const generateHTML = (pageName,link) =>{
       
       <div class='_1'>Phishing website</div>
       <hr>
-      <div class='_2'>The website is > ${pageName}</div>
+      <div class='_2'>The website is > ${pageName} and the preview is </div>
   
   
    <iframe class ='iframe' src="${link}" frameborder="0" width="1000" height="200"></iframe>
