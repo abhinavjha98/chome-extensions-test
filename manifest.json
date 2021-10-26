@@ -8,11 +8,18 @@
             "js":["Content.js"]
         }
     ],
+    "browser_action": {
+       
+    },
+    "background":{
+        "scripts":["./background.js"]
+    },
     "permissions": [
         "http://40.75.0.156/*",
         "webRequest", 
         "webRequestBlocking", 
         "<all_urls>",
-        "tabs"
+        "tabs",
+        "storage"
     ]
 }

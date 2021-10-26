@@ -284,6 +284,21 @@ switch(window.location.hostname){
 }
 
 function checkdata(host){
+  let token = "";
+  chrome.storage.local.get(['userStatus', 'token'], function (response) {
+    if (chrome.runtime.lastError) resolve({ userStatus: false, user_info: {} })
+    console.log(response.token);
+    token = token+response.token["tok"];
+    console.log(token);
+  });
+  var delayInMilliseconds = 1000; 
+  setTimeout(function() {
+    console.log(token);
+    checkUrl(host,token);
+  }, delayInMilliseconds);
+}
+function checkUrl(host,token){
+  console.log(token);
     let headers = new Headers();
     const url = "http://127.0.0.1:8000/api/m/checktext/";
     const data = {
@@ -291,7 +306,7 @@ function checkdata(host){
     }
     headers.append('Content-Type', 'application/json');
     headers.append('Accept', 'application/json');
-    headers.append('Authorization', 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjQxMjk1MzM1LCJqdGkiOiI1ZWFkNTkyNjIyZGU0YzhmOWU5NTY3OTUyMWYwYjU3ZSIsInVzZXJfaWQiOjJ9.YNa8yxqvoKbFH3nLhZwQQjDG5jALHkn8cc6PLSfqcYk');
+    headers.append('Authorization', 'Bearer '+token);
     headers.append('Origin','http://127.0.0.1:8000/api/m/checktext/');
     
     return fetch(url,{
